@@ -70,8 +70,29 @@ git branch -M main
 git push -u origin main  
 
 ## Creazione Migrazione  Modello 
+sail php artisan make:model Category -m
 sail php artisan make:model Expense -m
 
+## Esecuzione Migrazioni
+sail php artisan migrate
+
+## Creazione risorse Filament
+sail php artisan make:filament-resource Customer
+### di tipo modale Modale
+sail php artisan make:filament-resource Customer --simple
+#### con creazione autoamtica Form e Table a partire dal Modello 
+sail php artisan make:filament-resource Customer --generate
+
+## Procedo quindi con:
+sail php artisan make:filament-resource Category --simple --generate
+sail php artisan make:filament-resource Expense --simple --generate
+
+## Raggruppamento degli elementi di navigazione
+Per raggruppare sotto lo stesso menu un gruppo di risorse filament, aggiungere in ogni risorsa:
+
+use UnitEnum;
+
+protected static string | UnitEnum | null $navigationGroup = 'Settings';
 
 
 
