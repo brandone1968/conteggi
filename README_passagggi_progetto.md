@@ -94,6 +94,17 @@ use UnitEnum;
 
 protected static string | UnitEnum | null $navigationGroup = 'Settings';
 
+# Aggiungi Laravel Boost 
+sail composer require laravel/boost --dev
+sail php artisan boost:install
+
+VSCode
+1 Open the Command Palette (Cmd+Shift+P or Ctrl+Shift+P)
+2 Press enter on "MCP: List Servers"
+3 Arrow to laravel-boost and press enter
+4 Choose 'Start server' and you're good to go!
+
+
 
 
 
