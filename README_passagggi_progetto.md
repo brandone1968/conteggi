@@ -94,7 +94,7 @@ use UnitEnum;
 
 protected static string | UnitEnum | null $navigationGroup = 'Settings';
 
-# Aggiungi Laravel Boost 
+## Aggiungere Laravel Boost 
 sail composer require laravel/boost --dev
 sail php artisan boost:install
 
@@ -104,8 +104,61 @@ VSCode
 3 Arrow to laravel-boost and press enter
 4 Choose 'Start server' and you're good to go!
 
+## Togliere icone a tutti gli elementi di un gruppo e aggiungerla al gruppo
+Impostare in tutte le risorse del gruppo:  
+protected static string|BackedEnum|null $navigationIcon = null;  
+
+## Raggruppare gli elementi di navigazione in un gruppo
+protected static string | UnitEnum | null $navigationGroup = 'Settings';
+
+## Impostare multilingua
+Se vuoi semplicemente impostare la lingua italiana come principale:  
+in app.php  
+<?php
+'locale' => 'it',
+'fallback_locale' => 'it',
+// ...existing code...  
+
+e nel file .env  
+APP_LOCALE=it
+APP_FALLBACK_LOCALE=it  
+
+poi crea una cartella Lang\it e metti dentro le etichette, es:  
+
+<?php
+
+return [
+    'model-label' => 'Categoria',
+    'plural-model-label' => 'Categorie',
+    'navigation-label' => 'Categorie',
+    'form' => [
+        'name' => 'Nome',
+        'date' => 'Data',
+    ],
+    'table' => [
+        'name' => 'Nome',
+    ],
+];
+
+e nelle risorse:  
+
+    protected static ?string $slug = 'categories';
+
+    public static function getModelLabel(): string
+    {
+        return __(self::$slug . '.model-label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __(self::$slug . '.plural-model-label');
+    }  
 
 
+Per gestire invece più lingue usa il plugin bezhansalleh/filament-language-switch:  
+
+sail composer require bezhansalleh/filament-language-switch
+sail php artisan vendor:publish --tag="filament-language-switch-config"
 
 
 

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use BezhanSalleh\LanguageSwitch\Enums\Placement;
+use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+        $switch
+            ->locales(['it', 'en'])
+            ->visible(outsidePanels: true)
+            ->outsidePanelPlacement(Placement::TopRight)
+            ->flags([
+                'it' => asset('images/flags/it.svg'),
+                'en' => asset('images/flags/en.svg'),
+            ])
+            // ->flagsOnly()
+            ->circular();
+    });
     }
 }

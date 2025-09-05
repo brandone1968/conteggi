@@ -21,11 +21,30 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Settings';
+    protected static ?string $slug = 'categories';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    public static function getModelLabel(): string
+    {
+        return __(self::$slug . '.model-label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __(self::$slug . '.plural-model-label');
+    }
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    // public static function getNavigationLabel(): string
+    // {
+    //     return __(self::$slug . 'navigation-label');
+    // }
+
+    protected static string | UnitEnum | null $navigationGroup = 'Impostazioni';
+
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = null;
+
 
     public static function form(Schema $schema): Schema
     {

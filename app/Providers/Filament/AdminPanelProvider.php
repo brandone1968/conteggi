@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -18,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -55,7 +57,29 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->brandName('Conteggi');
+            ->brandName('Conteggi')
             // ->brandLogo(asset('images/logo.png'));
+            // ->plugins([
+            //    FilamentBackgroundPlugin::make()
+            //         ->imageProvider(
+            //             MyImages::make()
+            //             ->directory('images/backgrounds')
+            //         )
+            // ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Impostazioni')
+                    ->icon('heroicon-o-cog-6-tooth'),
+                NavigationGroup::make()
+                    ->label('Blog')
+                    ->icon('heroicon-o-pencil'),
+                NavigationGroup::make()
+                    ->label(fn(): string => __('navigation.Impostazioni'))
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->collapsed(),
+            ])
+            ->viteTheme('resources/css/filament/admin/theme.css');
+
+
     }
 }

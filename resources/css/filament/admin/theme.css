@@ -1,0 +1,399 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+@source '../../../../vendor/bezhansalleh/filament-language-switch/resources/views/**/*.blade.php';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+
+.fi-sidebar-nav ul{
+    row-gap: .25rem !important;
+}
+
+.fi-topbar nav{
+    background: rgba(140,125,112,.8) !important;
+}
+
+.fi-sidebar-header{
+    background: rgba(140,125,112,.9) !important;
+}
+
+.choose-products{
+    text-align: center;
+}
+.choose-products .choices__group {
+    text-align: left;
+    font-weight: bold;
+    color:white;
+    background-color: rgba(76, 196, 140, 0.8);
+}
+.choose-products .choices__list--dropdown, .choose-products .choices__list[aria-expanded]{
+display: contents;
+
+}
+
+.choose-products .choices__inner{
+    display: none;
+}
+
+.choose-products .choices__list--dropdown .choices__list, .choices__list[aria-expanded] .choices__list{
+    max-height: 25rem;
+}
+
+
+/*IMPOSTAZIONI*/
+[data-group-label="Impostazioni"], [data-group-label="Settings"]{
+    background: rgba(181,143,4,.8);
+}
+
+[data-group-label="Impostazioni"] svg.fi-sidebar-group-icon, [data-group-label="Settings"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Impostazioni"] svg.fi-icon-btn-icon, [data-group-label="Settings"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+/* aggiunto per icona gruppo navigazione deinito in AdminPanelProvider */
+[data-group-label="Impostazioni"] svg.fi-icon, [data-group-label="Settings"] svg.fi-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Impostazioni"] span.fi-sidebar-group-label, [data-group-label="Settings"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Impostazioni"] span.fi-sidebar-item-label, [data-group-label="Settings"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Impostazioni"] li.fi-sidebar-item, [data-group-label="Settings"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Impostazioni"] li.fi-sidebar-item a:hover, [data-group-label="Settings"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(181,143,4,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Impostazioni"] li.fi-sidebar-item.fi-active a, [data-group-label="Settings"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(181,143,4,.9);
+    border-radius: 0px;
+}
+
+/*UTENTI*/
+[data-group-label="Utenti"], [data-group-label="Users"]{
+    background: rgba(137,139,65,.8);
+}
+
+[data-group-label="Utenti"] svg.fi-sidebar-group-icon, [data-group-label="Users"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Utenti"] svg.fi-icon-btn-icon, [data-group-label="Users"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+/* aggiunto per icona gruppo navigazione deinito in AdminPanelProvider */
+[data-group-label="Utenti"] svg.fi-icon, [data-group-label="Users"] svg.fi-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Utenti"] span.fi-sidebar-group-label, [data-group-label="Users"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Utenti"] span.fi-sidebar-item-label, [data-group-label="Users"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Utenti"] li.fi-sidebar-item, [data-group-label="Users"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Utenti"] li.fi-sidebar-item a:hover, [data-group-label="Users"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(137,139,65,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Utenti"] li.fi-sidebar-item.fi-active a, [data-group-label="Users"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(137,139,65,.9);
+    border-radius: 0px;
+}
+
+/*SITI*/
+[data-group-label="Siti"], [data-group-label="Sites"]{
+    background: rgba(166,177,225,.8);
+}
+
+[data-group-label="Siti"] svg.fi-sidebar-group-icon, [data-group-label="Sites"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Siti"] svg.fi-icon-btn-icon, [data-group-label="Sites"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Siti"] span.fi-sidebar-group-label, [data-group-label="Sites"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Siti"] span.fi-sidebar-item-label, [data-group-label="Sites"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Siti"] li.fi-sidebar-item, [data-group-label="Sites"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Siti"] li.fi-sidebar-item a:hover, [data-group-label="Sites"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(166,177,225,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Siti"] li.fi-sidebar-item.fi-active a, [data-group-label="Sites"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(166,177,225,.9);
+    border-radius: 0px;
+}
+
+/*SCUOLE*/
+[data-group-label="Scuole"], [data-group-label="Schools"]{
+    background: rgba(255,98,49,.8);
+}
+
+[data-group-label="Scuole"] svg.fi-sidebar-group-icon, [data-group-label="Schools"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Scuole"] svg.fi-icon-btn-icon, [data-group-label="Schools"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Scuole"] span.fi-sidebar-group-label, [data-group-label="Schools"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Scuole"] span.fi-sidebar-item-label, [data-group-label="Schools"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Scuole"] li.fi-sidebar-item, [data-group-label="Schools"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Scuole"] li.fi-sidebar-item a:hover, [data-group-label="Schools"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(255,98,49,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Scuole"] li.fi-sidebar-item.fi-active a, [data-group-label="Schools"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(255,98,49,.9);
+    border-radius: 0px;
+}
+
+/*ECOMMERCE*/
+[data-group-label="E-Commerce"]{
+    background: rgba(92,184,92,.8);
+}
+
+[data-group-label="E-Commerce"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="E-Commerce"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+[data-group-label="E-Commerce"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="E-Commerce"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="E-Commerce"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="E-Commerce"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(92,184,92,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="E-Commerce"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(92,184,92,.9);
+    border-radius: 0px;
+}
+
+
+/*CATALOGO*/
+[data-group-label="Catalogo"], [data-group-label="Catalogue"]{
+    background: rgba(24,124,85,.8);
+}
+
+[data-group-label="Catalogo"] svg.fi-sidebar-group-icon, [data-group-label="Catalogue"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Catalogo"] svg.fi-icon-btn-icon, [data-group-label="Catalogue"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Catalogo"] span.fi-sidebar-group-label, [data-group-label="Catalogue"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Catalogo"] span.fi-sidebar-item-label, [data-group-label="Catalogue"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Catalogo"] li.fi-sidebar-item, [data-group-label="Catalogue"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Catalogo"] li.fi-sidebar-item a:hover, [data-group-label="Catalogue"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(24,124,85,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Catalogo"] li.fi-sidebar-item.fi-active a, [data-group-label="Catalogue"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(24,124,85,.8);
+    border-radius: 0px;
+}
+
+/*PAGAMENTI*/
+
+[data-group-label="Pagamenti"], [data-group-label="Payments"]{
+    background: rgba(130,113,171,.8);
+}
+
+[data-group-label="Pagamenti"] svg.fi-sidebar-group-icon, [data-group-label="Payments"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Pagamenti"] svg.fi-icon-btn-icon, [data-group-label="Payments"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Pagamenti"] span.fi-sidebar-group-label, [data-group-label="Payments"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Pagamenti"] span.fi-sidebar-item-label, [data-group-label="Payments"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Pagamenti"] li.fi-sidebar-item, [data-group-label="Payments"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Pagamenti"] li.fi-sidebar-item a:hover, [data-group-label="Payments"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(117,101,153,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Pagamenti"] li.fi-sidebar-item.fi-active a, [data-group-label="Payments"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(117,101,153,.9);
+    border-radius: 0px;
+}
+
+/*ORDINI*/
+
+[data-group-label="Ordini"], [data-group-label="Orders"]{
+    background: rgba(91,192,222,.8);
+}
+
+[data-group-label="Ordini"] svg.fi-sidebar-group-icon, [data-group-label="Orders"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Ordini"] svg.fi-icon-btn-icon, [data-group-label="Orders"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Ordini"] span.fi-sidebar-group-label, [data-group-label="Orders"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Ordini"] span.fi-sidebar-item-label, [data-group-label="Orders"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Ordini"] li.fi-sidebar-item, [data-group-label="Orders"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Ordini"] li.fi-sidebar-item a:hover, [data-group-label="Orders"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(107,198,225,.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Ordini"] li.fi-sidebar-item.fi-active a, [data-group-label="Orders"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(107,198,225,.9);
+    border-radius: 0px;
+}
+
+
+/*VENDITA ONSITE*/
+
+[data-group-label="Vendita On Site"], [data-group-label="On Site Sale"]{
+    background: rgba(76, 196, 140, 0.8);
+}
+
+[data-group-label="Vendita On Site"] svg.fi-sidebar-group-icon, [data-group-label="On Site Sale"] svg.fi-sidebar-group-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Vendita On Site"] svg.fi-icon-btn-icon, [data-group-label="On Site Sale"] svg.fi-icon-btn-icon {
+    color: #fff !important;
+}
+
+[data-group-label="Vendita On Site"] span.fi-sidebar-group-label, [data-group-label="On Site Sale"] span.fi-sidebar-group-label {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+[data-group-label="Vendita On Site"] span.fi-sidebar-item-label, [data-group-label="On Site Sale"] span.fi-sidebar-item-label {
+    color: #fff !important;
+}
+
+[data-group-label="Vendita On Site"] li.fi-sidebar-item, [data-group-label="On Site Sale"] li.fi-sidebar-item {
+    color: #fff !important;
+}
+
+[data-group-label="Vendita On Site"] li.fi-sidebar-item a:hover, [data-group-label="On Site Sale"] li.fi-sidebar-item a:hover {
+    color: #fff !important;
+    background: rgba(76, 196, 140, 0.8);
+    border-radius: 0px;
+}
+
+[data-group-label="Vendita On Site"] li.fi-sidebar-item.fi-active a, [data-group-label="On Site Sale"] li.fi-sidebar-item.fi-active a {
+    color: #fff !important;
+    background: rgba(76, 196, 140, 0.8);
+    border-radius: 0px;
+}
+

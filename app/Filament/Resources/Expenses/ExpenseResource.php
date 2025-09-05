@@ -27,9 +27,10 @@ class ExpenseResource extends Resource
 
     protected static ?string $slug = 'expense';
 
-    protected static string | UnitEnum | null $navigationGroup = 'Settings';
+    protected static string | UnitEnum | null $navigationGroup = 'Impostazioni';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = null;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -64,13 +65,12 @@ class ExpenseResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(_(self::$slug . '.table.name')),
-                TextColumn::make('expenses.id')
-                    ->numeric()
+                TextColumn::make('category.name')
                     ->sortable(),
                 TextColumn::make('amount')
-                    ->searchable(),
-                TextColumn::make('user_id')
                     ->numeric()
+                    ->searchable(),
+                TextColumn::make('user.name')
                     ->sortable(),
                 TextColumn::make('date')
                     ->date()
