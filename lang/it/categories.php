@@ -10,5 +10,7 @@ return [
     ],
     'table' => [
         'name' => 'Nome',
+        'created_at' => 'Creato il',
+        'updated_at' => 'Aggiornato il',
     ],
 ];

@@ -25,7 +25,17 @@ class ExpenseResource extends Resource
 {
     protected static ?string $model = Expense::class;
 
-    protected static ?string $slug = 'expense';
+    protected static ?string $slug = 'expenses';
+
+    public static function getModelLabel(): string
+    {
+        return __(self::$slug . '.model-label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __(self::$slug . '.plural-model-label');
+    }
 
     protected static string | UnitEnum | null $navigationGroup = 'Impostazioni';
 
@@ -41,18 +51,20 @@ class ExpenseResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->label(_(self::$slug . '.form.name')),
+                    ->label(__(self::$slug . '.form.name')),
                 Select::make('category_id')
+                    ->label(__(self::$slug . '.table.category'))
                     ->relationship('category', 'name')
                     ->required(),
                 TextInput::make('amount')
+                    ->label(__(self::$slug . '.form.amount'))
                     ->required(),
                 Hidden::make('user_id')
                     ->default(Auth::id()),
                 DatePicker::make('date')
                     ->required()
                     ->default(now())
-                    ->label(_(self::$slug . '.form.date')),
+                    ->label(__(self::$slug . '.form.date')),
             ]);
     }
 
@@ -64,22 +76,28 @@ class ExpenseResource extends Resource
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable()
-                    ->label(_(self::$slug . '.table.name')),
+                    ->label(__(self::$slug . '.table.name')),
                 TextColumn::make('category.name')
+                    ->label(__(self::$slug . '.table.category'))
                     ->sortable(),
                 TextColumn::make('amount')
+                    ->label(__(self::$slug . '.table.amount'))
                     ->numeric()
                     ->searchable(),
                 TextColumn::make('user.name')
+                    ->label(__(self::$slug . '.table.user'))
                     ->sortable(),
                 TextColumn::make('date')
                     ->date()
+                    ->label(__(self::$slug . '.table.date'))
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label(__(self::$slug . '.table.created_at'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__(self::$slug . '.table.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

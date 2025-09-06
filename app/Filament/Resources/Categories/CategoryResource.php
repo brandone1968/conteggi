@@ -51,6 +51,7 @@ class CategoryResource extends Resource
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__(self::$slug . '.form.name'))
                     ->required(),
             ]);
     }
@@ -61,12 +62,15 @@ class CategoryResource extends Resource
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
+                    ->label(__(self::$slug . '.form.name'))
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label(__(self::$slug . '.table.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__(self::$slug . '.table.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
