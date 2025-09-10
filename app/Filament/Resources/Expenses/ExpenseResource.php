@@ -20,6 +20,8 @@ use Filament\Tables\Table;
 use UnitEnum;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Hidden;
+use Filament\Actions\ImportAction;
+use App\Filament\Imports\ExpenseImporter;
 
 class ExpenseResource extends Resource
 {
@@ -108,6 +110,10 @@ class ExpenseResource extends Resource
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
+            ])
+            ->headerActions([
+                ImportAction::make()
+                    ->importer(ExpenseImporter::class)
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

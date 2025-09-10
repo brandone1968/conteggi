@@ -114,53 +114,85 @@ protected static string | UnitEnum | null $navigationGroup = 'Settings';
 ## Impostare multilingua
 Se vuoi semplicemente impostare la lingua italiana come principale:  
 in app.php  
-<?php
+
+// config/app.php
+
 'locale' => 'it',
 'fallback_locale' => 'it',
-// ...existing code...  
+// ...altre configurazioni...
+
+// .env
+
+APP_LOCALE=it
+APP_FALLBACK_LOCALE=it
+
+// lang/it/categories.php
+
+'<?php  
+
+'locale' => 'it',  
+'fallback_locale' => 'it',  
+// ...existing code...    
+
 
 e nel file .env  
-APP_LOCALE=it
+APP_LOCALE=it  
 APP_FALLBACK_LOCALE=it  
+
 
 poi crea una cartella Lang\it e metti dentro le etichette, es:  
 
-<?php
 
-return [
-    'model-label' => 'Categoria',
-    'plural-model-label' => 'Categorie',
-    'navigation-label' => 'Categorie',
-    'form' => [
-        'name' => 'Nome',
-        'date' => 'Data',
-    ],
-    'table' => [
-        'name' => 'Nome',
-    ],
-];
+'<?php  
 
-e nelle risorse:  
 
-    protected static ?string $slug = 'categories';
+return [  
+    'model-label' => 'Categoria',  
+    'plural-model-label' => 'Categorie',  
+    'navigation-label' => 'Categorie',  
+    'form' => [  
+        'name' => 'Nome',  
+        'date' => 'Data',  
+    ],  
+    'table' => [  
+        'name' => 'Nome',  
+    ],  
+];  
 
-    public static function getModelLabel(): string
+e nelle risorse:   
+
+    protected static ?string $slug = 'categories';  
+
+    public static function getModelLabel(): string  
     {
-        return __(self::$slug . '.model-label');
+        return __(self::$slug . '.model-label');  
     }
 
-    public static function getPluralModelLabel(): string
+    public static function getPluralModelLabel(): string  
     {
-        return __(self::$slug . '.plural-model-label');
-    }  
+        return __(self::$slug . '.plural-model-label');  
+    } 
 
 
 Per gestire invece più lingue usa il plugin bezhansalleh/filament-language-switch:  
 
-sail composer require bezhansalleh/filament-language-switch
-sail php artisan vendor:publish --tag="filament-language-switch-config"
+sail composer require bezhansalleh/filament-language-switch  
+sail php artisan vendor:publish --tag="filament-language-switch-config"  
 
+NB: per gestire il multilingua devi anche creare un tema css personalizzato, per farlo segui istruzioni  di Laravel 12 e poi le indicazioni nella documentazione github del plugin.  
 
+# Importazione dati da CSV
+sail php artisan make:queue-batches-table  
+sail php artisan make:notifications-table  
+
+sail php artisan vendor:publish --tag=filament-actions-migrations  
+sail php artisan migrate  
+
+crea la classe importatore:
+sail php artisan make:filament-importer Expense  
+
+NB. Devi rimanere in ascolto delle code:  
+sail php artisan queue:work
 
 
 
