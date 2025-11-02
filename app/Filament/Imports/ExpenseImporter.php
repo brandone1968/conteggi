@@ -123,6 +123,7 @@ class ExpenseImporter extends Importer
 
     public static function getCompletedNotificationBody(Import $import): string
     {
+        // dd('ExpenseImporter::getCompletedNotificationBody called', $import);
         $body = 'Your expense import has completed and ' . Number::format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {

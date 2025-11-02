@@ -194,5 +194,23 @@ sail php artisan make:filament-importer Expense
 NB. Devi rimanere in ascolto delle code:  
 sail php artisan queue:work
 
+In sviluppo imposta nel file .env con
+QUEUE_CONNECTION=sync
+in produzione imposta .env con
+QUEUE_CONNECTION=database
+e attiva le code con
+sail php artisan queue:work
+
+In sviluppo con sync non c'è bisogno di lanciare le code sail php artisan queue:work perchè viene eseguito tutto subito.
+Se imposti QUEUE_CONNECTION=database e lanci le code ma non funzionano le notifiche, controlla che siano create nella tabella notifications del db,
+il motivo percui non vengono inviate le notifiche è perché il worker (che vive in background) non può "magicamente" far apparire un pop-up nel tuo browser.
+
+Per questo, hai bisogno di un server di Broadcasting.
+Configura un driver come Laravel Reverb (il più moderno per Laravel/Filament).
+Assicurati che sia installato: sail artisan install:broadcasting
+Avvialo: sail artisan reverb:start
+Avvia il frontend: npm run dev (perché il JavaScript deve connettersi a Reverb).
+
+Usare MySQL (o Postgres) invece di SQLite risolve il problema del Database is locked. Permette al tuo worker in background di lavorare in modo affidabile senza che il processo web (Filament) e il processo worker (la coda) si "scontrino" cercando di accedere allo stesso file contemporaneamente.
 
 
