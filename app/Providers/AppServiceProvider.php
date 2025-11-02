@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use BezhanSalleh\LanguageSwitch\Enums\Placement;
-use BezhanSalleh\LanguageSwitch\LanguageSwitch;
+use Filament\Actions\Imports\Models\Import as FilamentImport;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,17 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-        $switch
-            ->locales(['it', 'en'])
-            ->visible(outsidePanels: true)
-            ->outsidePanelPlacement(Placement::TopRight)
-            ->flags([
-                'it' => asset('images/flags/it.svg'),
-                'en' => asset('images/flags/en.svg'),
-            ])
-            ->flagsOnly()
-            ->circular();
-    });
+        // salva l'id dell'utente che avvia l'import direttamente sulla tabella imports
+        FilamentImport::creating(function (FilamentImport $import): void {
+            try {
+                $import->user_id = Auth::id();
+            } catch (\Throwable $e) {
+                // non bloccare la richiesta
+            }
+        });
     }
 }

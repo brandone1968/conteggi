@@ -113,13 +113,22 @@ class ExpenseResource extends Resource
             ])
             ->headerActions([
                 ImportAction::make()
-                    ->importer(ExpenseImporter::class)
+                    ->importer(ExpenseImporter::class),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            // ImportAction senza mutateRecordData (user_id viene salvato in meta dall'AppServiceProvider)
+            ImportAction::make()
+                ->importer(ExpenseImporter::class),
+        ];
     }
 
     public static function getPages(): array

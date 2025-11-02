@@ -3,16 +3,15 @@
 namespace App\Filament\Imports;
 
 use App\Models\Expense;
-use Filament\Actions\Imports\ImportColumn;
+use App\Models\Category;
 use Filament\Actions\Imports\Exceptions\RowImportFailedException;
 use Filament\Actions\Imports\Importer;
+use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Models\Import;
-use Illuminate\Support\Number;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Category;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Number;
 use Illuminate\Database\Eloquent\Model;
-
 
 class ExpenseImporter extends Importer
 {
@@ -27,16 +26,19 @@ class ExpenseImporter extends Importer
                 ->label(__(self::$slug . '.form.name'))
                 ->requiredMapping()
                 ->rules(['required', 'max:255']),
+
+            // CSV header: "category" (nome) oppure "category_id" (id)
             ImportColumn::make('category')
                 ->label(__(self::$slug . '.form.category'))
                 ->requiredMapping()
-                ->relationship(resolveUsing: 'name')
                 ->rules(['required']),
+
             ImportColumn::make('amount')
                 ->label(__(self::$slug . '.form.amount'))
                 ->requiredMapping()
                 ->numeric()
                 ->rules(['required', 'numeric']),
+
             ImportColumn::make('date')
                 ->label(__(self::$slug . '.form.date'))
                 ->requiredMapping()
@@ -44,29 +46,83 @@ class ExpenseImporter extends Importer
         ];
     }
 
-    public function resolveRecord(): ?Expense
+    public function resolveRecord(): Expense
     {
-        Log::info('Tentativo di risoluzione record con i seguenti dati:', $this->data);
-
-        // Usiamo fill() per popolare il modello con i dati validati dal CSV.
-        // Aggiungiamo manualmente l'ID dell'utente loggato.
-        // Filament gestirà la risoluzione della relazione 'category' in 'category_id'.
-        return (new Expense)->fill(
-            array_merge($this->data, ['user_id' => auth()->id()])
-        );
+        return new Expense();
     }
 
-    protected function afterSave(Model $record): void
+    public function fillRecord(): void
     {
-        // LOG 2: Conferma che il record è stato salvato con successo
-        Log::info('Record spesa salvato con successo:', $record->toArray());
+        Log::info('ExpenseImporter::fillRecord called', [
+            'import_id' => $this->import->id ?? null,
+            'row_number' => $this->rowNumber ?? null,
+            'data' => $this->data,
+        ]);
+
+        $categoryId = $this->data['category_id'] ?? null;
+
+        if (empty($categoryId) && ! empty($this->data['category'])) {
+            $categoryName = trim((string) $this->data['category']);
+            $category = Category::where('name', $categoryName)->first();
+
+            if (! $category) {
+                Log::warning('ExpenseImporter: categoria non trovata', [
+                    'category' => $categoryName,
+                    'import_id' => $this->import->id ?? null,
+                    'row_number' => $this->rowNumber ?? null,
+                ]);
+
+                throw new RowImportFailedException("Categoria non trovata: {$categoryName}");
+            }
+
+            $categoryId = $category->id;
+        }
+
+        if (empty($categoryId)) {
+            Log::warning('ExpenseImporter: category_id mancante o non risolvibile', [
+                'data' => $this->data,
+                'import_id' => $this->import->id ?? null,
+                'row_number' => $this->rowNumber ?? null,
+            ]);
+
+            throw new RowImportFailedException('Category_id mancante o non risolvibile.');
+        }
+
+        $importUserId = $this->import->user_id ?? null;
+        $userId = $this->data['user_id'] ?? $importUserId ?? Auth::id();
+
+        $this->record->fill([
+            'name' => $this->data['name'] ?? null,
+            'category_id' => $categoryId,
+            'amount' => $this->data['amount'] ?? null,
+            'date' => $this->data['date'] ?? null,
+            'user_id' => $userId,
+        ]);
+
+        Log::info('ExpenseImporter::fillRecord populated record', [
+            'record' => $this->record->getAttributes(),
+            'import_id' => $this->import->id ?? null,
+            'row_number' => $this->rowNumber ?? null,
+        ]);
     }
 
-
+    protected function afterSave(): void
+    {
+        if ($this->record instanceof Model) {
+            Log::info('ExpenseImporter::afterSave saved record', [
+                'id' => $this->record->id,
+                'attributes' => $this->record->toArray(),
+                'import_id' => $this->import->id ?? null,
+            ]);
+        } else {
+            Log::info('ExpenseImporter::afterSave record not Model', [
+                'import_id' => $this->import->id ?? null,
+            ]);
+        }
+    }
 
     public static function getCompletedNotificationBody(Import $import): string
     {
-        Log::info('getCompletedNotificationBody è stato richiamato!');
         $body = 'Your expense import has completed and ' . Number::format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {
