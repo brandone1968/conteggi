@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+use Filament\Schemas\Schema;
+use App\Models\{{ model }};
+
+class {{ class }}
+{
+    public static function make(Schema $form): Schema
+    {
+        return $form
+            ->schema([
+                // Aggiungi qui i tuoi campi
+            ]);
+    }
+}

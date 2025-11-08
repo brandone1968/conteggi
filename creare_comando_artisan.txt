@@ -1,0 +1,13 @@
+Da terminale crea il nuovo comando con:
+sail php artisan make:command MBSplitResourceCommand
+
+Creare gli "Stub" (Gli "stub" sono i template che il tuo comando userà per generare i nuovi file).
+
+Crea una nuova cartella in app/Console/Commands/Stubs.
+
+All'interno di Stubs, crea due file:
+split-resource.table.stub
+split-resource.schema.stub
+
+Esempio di utilizzo:
+sail php artisan MB:splitresource Categories
